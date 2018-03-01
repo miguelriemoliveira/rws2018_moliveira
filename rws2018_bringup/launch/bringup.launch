@@ -8,6 +8,7 @@
   <node pkg="player_lsarmento" type="player_lsarmento_node" name="lsarmento" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_blourenco" type="player_blourenco_node" name="blourenco" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_jmota" type="player_jmota_node" name="jmota" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_bramos" type="player_bramos_node" name="bramos" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <!-- team green -->
   <node pkg="player_rsilva" type="player_rsilva_node" name="rsilva" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_tmarques" type="player_tmarques_node" name="tmarques" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
@@ -19,19 +20,18 @@
   <node pkg="player_esteves" type="player_esteves_node" name="esteves" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_nsilva" type="player_nsilva_node" name="nsilva" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_jrodrigues" type="player_jrodrigues_node" name="jrodrigues" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_ssantos" type="player_ssantos_node" name="ssantos" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+
   <!-- end teams -->
   <!--Load the parameters-->
   <rosparam command="load" file="$(find rws2018_bringup)/params/default.yaml"/>
-
-<!--Launch the visualization-->
+  <!--Launch the visualization-->
   <node pkg="rviz" type="rviz" name="rviz" args="--display-config $(find rws2018_bringup)/config/rviz.rviz" required="true"/>
-
-
   <!--[>Launch the referee<]-->
   <!--<node pkg="rwsfi2016_referee" type="referee.py" name="referee"/>-->
   <!--[>Launch the killer<]-->
   <!--[><node pkg="rwsfi2016_referee" type="killer.py" name="killer"/><]-->
-    <!--<node pkg="rwsfi2016_referee" type="draw_teams" name="draw_teams"/>-->
+  <!--<node pkg="rwsfi2016_referee" type="draw_teams" name="draw_teams"/>-->
   <!--[>Launch the players<]-->
   <!--[>Team red<]-->
   <!--<node pkg="player_idomingues" type="player_idomingues" name="idomingues" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
