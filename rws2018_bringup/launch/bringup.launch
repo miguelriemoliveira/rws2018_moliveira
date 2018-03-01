@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- -->
+<launch>
+  <arg name="delay" default="10"/>
+
+
+  <node pkg="player_moliveira" type="player_moliveira_node" name="moliveira" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_jmota" type="player_jmota_node" name="jmota" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+
+
+
+  <!--Load the parameters-->
+  <rosparam command="load" file="$(find rws2018_bringup)/params/default.yaml"/>
+
+  <!--[>Launch the referee<]-->
+  <!--<node pkg="rwsfi2016_referee" type="referee.py" name="referee"/>-->
+  <!--[>Launch the killer<]-->
+  <!--[><node pkg="rwsfi2016_referee" type="killer.py" name="killer"/><]-->
+  <!--[>Launch the visualization<]-->
+  <!--<node pkg="rviz" type="rviz" name="rviz" args="-display-config $(find rwsfi2016_referee)/config/rviz.rviz" required="true"/>-->
+  <!--<node pkg="rwsfi2016_referee" type="draw_teams" name="draw_teams"/>-->
+  <!--[>Launch the players<]-->
+  <!--[>Team red<]-->
+  <!--<node pkg="player_idomingues" type="player_idomingues" name="idomingues" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--<node pkg="player_mcamarneiro" type="player_mcamarneiro" name="mcamarneiro" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--<node pkg="player_jxavier" type="player_jxavier" name="jxavier" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--[>Team Green<]-->
+  <!--<node pkg="player_jsantos" type="player_jsantos" name="jsantos" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--<node pkg="player_testeves" type="player_testeves" name="testeves" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--<node pkg="player_jleao" type="player_jleao" name="jleao" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--[>Team blue<]-->
+  <!--[><node pkg="player_moliveira" type="player_moliveira" name="moliveira" output="screen" respawn="true" respawn_delay="$(arg delay)"/><]-->
+  <!--<node pkg="player_mmiranda" type="player_mmiranda" name="mmiranda" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--<node pkg="player_mriem" type="player_mriem" name="mriem" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--<node pkg="player_dcampos" type="player_dcampos" name="dcampos" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
+  <!--[><node pkg="player_moliveira" type="player_moliveira" name="dummyred" output="screen" respawn="true" respawn_delay="$(arg delay)"><]-->
+  <!--[><remap from="moliveira" to="dummyred"/><]-->
+  <!--[><remap from="turtle" to="dog"/><]-->
+  <!--[></node><]-->
+  <!--[><node pkg="player_moliveira" type="player_moliveira" name="dummygreen" output="screen" respawn="true" respawn_delay="$(arg delay)"><]-->
+  <!--[><remap from="moliveira" to="dummygreen"/><]-->
+  <!--[><remap from="turtle" to="cheetah"/><]-->
+  <!--[></node><]-->
+  <!--[>To record all the data for the game<]-->
+  <!--<node name="rosbag_record" pkg="rosbag" type="record" output="screen" args=" -a -o /tmp/rwsfi2016">-->
+<!--</node>-->
+</launch>

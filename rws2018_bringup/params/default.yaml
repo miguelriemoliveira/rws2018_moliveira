@@ -1,0 +1,12 @@
+team_red: ["player_moliveira","player_lsarmento","player_blourenco", "player_jmota"]
+team_green: ["testeves","jleao","jsantos"]
+team_blue: ["mriem","dcampos","mmiranda"]
+
+hunting_distance: 0.5
+game_duration: 120
+positive_score: 1
+negative_score: -1
+
+
+
+
