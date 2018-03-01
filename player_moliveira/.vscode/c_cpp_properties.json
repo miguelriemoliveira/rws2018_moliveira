@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/mike/catkin_ws/devel/include",
+                    "/opt/ros/kinetic/include",
+                    "/home/mike/catkin_ws/src/rws2018/rws2018_moliveira/player_moliveira/include",
+                    "/usr/include"
+                ]
+            },
+            "includePath": [
+                "/home/mike/catkin_ws/devel/include",
+                "/opt/ros/kinetic/include",
+                "/home/mike/catkin_ws/src/rws2018/rws2018_moliveira/player_moliveira/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 3
+}
