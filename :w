@@ -62,7 +62,6 @@ namespace rws_moliveira
       boost::shared_ptr<Team> red_team;
       boost::shared_ptr<Team> green_team;
       boost::shared_ptr<Team> blue_team;
-      tf::TransformBroadcaster br; //declare the broadcaster
 
       MyPlayer(string argin_name, string argin_team) : Player(argin_name)
     {
@@ -75,16 +74,6 @@ namespace rws_moliveira
 
       printReport();
     }
-
-      void move(void)
-      {
-        tf::Transform transform; //declare the transformation object
-        transform.setOrigin( tf::Vector3(7, 7, 0.0) );
-        tf::Quaternion q;
-        q.setRPY(0, 0, M_PI/3);
-        transform.setRotation(q);
-        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "moliveira"));
-      }
 
       void printReport()
       {
@@ -99,7 +88,6 @@ int main(int argc, char** argv)
 {
 
   ros::init(argc, argv, "moliveira");
-  ros::NodeHandle n;
 
   //Creating an instance of class Player
   rws_moliveira::MyPlayer my_player("moliveira", "green");
@@ -109,14 +97,17 @@ int main(int argc, char** argv)
     cout << "a joana esta na equipa certa" << endl;
   };
 
-  ros::Rate loop_rate(10);
-  while (ros::ok())
-  {
-    my_player.move();
+  ros::NodeHandle n;
 
-    ros::spinOnce();
-    loop_rate.sleep();
-  }
+  tf::TransformBroadcaster br; //declare the broadcaster
+  tf::Transform transform; //declare the transformation object
+  transform.setOrigin( tf::Vector3(7, 7, 0.0) );
+  tf::Quaternion q;
+  q.setRPY(0, 0, MATH_PI/3);
+  transform.setRotation(q);
+  br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", turtle_name));
+
+  ros::spin();
 
 }
 

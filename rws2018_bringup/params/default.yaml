@@ -1,6 +1,6 @@
-team_red: ["player_moliveira","player_lsarmento","player_blourenco", "player_jmota"]
-team_green: ["testeves","jleao","jsantos"]
-team_blue: ["mriem","dcampos","mmiranda"]
+team_red: ["moliveira","lsarmento","blourenco", "jmota"]
+team_green: ["rsilva","tmarques","pboucanova","filipecosta","tosorio"]
+team_blue: ["amartins","resteves","nsilva","jrodrigues","ssantos"]
 
 hunting_distance: 0.5
 game_duration: 120
