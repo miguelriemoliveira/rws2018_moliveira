@@ -22,13 +22,16 @@
   <!-- end teams -->
   <!--Load the parameters-->
   <rosparam command="load" file="$(find rws2018_bringup)/params/default.yaml"/>
+
+<!--Launch the visualization-->
+  <node pkg="rviz" type="rviz" name="rviz" args="--display-config $(find rws2018_bringup)/config/rviz.rviz" required="true"/>
+
+
   <!--[>Launch the referee<]-->
   <!--<node pkg="rwsfi2016_referee" type="referee.py" name="referee"/>-->
   <!--[>Launch the killer<]-->
   <!--[><node pkg="rwsfi2016_referee" type="killer.py" name="killer"/><]-->
-  <!--[>Launch the visualization<]-->
-  <!--<node pkg="rviz" type="rviz" name="rviz" args="-display-config $(find rwsfi2016_referee)/config/rviz.rviz" required="true"/>-->
-  <!--<node pkg="rwsfi2016_referee" type="draw_teams" name="draw_teams"/>-->
+    <!--<node pkg="rwsfi2016_referee" type="draw_teams" name="draw_teams"/>-->
   <!--[>Launch the players<]-->
   <!--[>Team red<]-->
   <!--<node pkg="player_idomingues" type="player_idomingues" name="idomingues" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
