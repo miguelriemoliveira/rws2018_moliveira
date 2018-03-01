@@ -33,7 +33,7 @@ __status__ = "Development"
 #########################
 
 #Taken from https://github.com/miguelriemoliveira/rws2016_moliveira/wiki/List-of-players-and-teams
-urls = ["https://github.com/miguelriemoliveira/rws2018_moliveira","https://github.com/lpes34/rws2018_lsarmento.git","https://github.com/bernardomig/rws2018_blourenco.git","https://github.com/JoanaMota/rws2018_jmota","https://github.com/ricardolfsilva/rws2018_rsilva","https://github.com/TiagoSMarques/rws2018_tmarques","https://github.com/pedroboucanova/rws2018_pboucanova","https://github.com/FilipeOCosta/rws2018_filipecosta","https://github.com/tomassosorio/rws2018_tosorio","https://github.com/arcmmartins/rws2018_amartins","https://github.com/RFRE/rws2018_resteves","https://github.com/nmssilva/rws2018_nsilva","https://github.com/jgnrodrigues/rws2018_jrodrigues"]
+urls = ["https://github.com/miguelriemoliveira/rws2018_moliveira","https://github.com/lpes34/rws2018_lsarmento.git","https://github.com/bernardomig/rws2018_blourenco.git","https://github.com/JoanaMota/rws2018_jmota","https://github.com/ricardolfsilva/rws2018_rsilva","https://github.com/TiagoSMarques/rws2018_tmarques","https://github.com/pedroboucanova/rws2018_pboucanova","https://github.com/FilipeOCosta/rws2018_filipecosta","https://github.com/tomassosorio/rws2018_tosorio","https://github.com/arcmmartins/rws2018_amartins","https://github.com/RFRE/rws2018_resteves","https://github.com/nmssilva/rws2018_nsilva","https://github.com/jgnrodrigues/rws2018_jrodrigues","https://github.com/sofiamsantos/rws2018_ssantos","https://github.com/sapofree/rws2018_BRamos.git"]
 
 #Can be changed with command line argument clone, i.e., ./pull_all.py clone
 clone_mode = False
