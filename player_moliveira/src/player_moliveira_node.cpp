@@ -139,6 +139,24 @@ namespace rws_moliveira
       }
 
 
+      double getDistanceToPlayer(string other_player, double time_to_wait=DEFAULT_TIME)
+      {
+        StampedTransform t; //The transform object
+        //Time now = Time::now(); //get the time
+        Time now = Time(0); //get the latest transform received
+
+        try{
+          listener.waitForTransform("moliveira", other_player, now, Duration(time_to_wait));
+          listener.lookupTransform("moliveira", other_player, now, t);
+        }
+        catch (TransformException& ex){
+          ROS_ERROR("%s",ex.what());
+          return NAN;
+        }
+
+        return sqrt(t.getOrigin().y()*t.getOrigin().y() + t.getOrigin().x()*t.getOrigin().x());
+      }
+
       double getAngleToPLayer(string other_player, double time_to_wait=DEFAULT_TIME)
       {
         StampedTransform t; //The transform object
@@ -167,9 +185,25 @@ namespace rws_moliveira
         //---------------------------------------
         //--- AI PART 
         //---------------------------------------
-        double displacement = 6; //computed using AI
-        double delta_alpha = getAngleToPLayer("tosorio");
-
+        
+        //Find nearest prey (player_to_hunt will be the nearest prey player)
+        double min_distance = 99999;
+        string player_to_hunt = "no player";
+        for (size_t i=0; i < my_preys->player_names.size(); i++)
+        {
+            double dist = getDistanceToPlayer(my_preys->player_names[i]);
+            if (isnan(dist))
+            {
+            }
+            else if (dist < min_distance)
+            {
+              min_distance = dist;
+              player_to_hunt = my_preys->player_names[i];
+            }
+        }
+        
+        double displacement = 1; //max velocity for now
+        double delta_alpha = getAngleToPLayer(player_to_hunt);
         if (isnan(delta_alpha))
           delta_alpha = 0;
 
@@ -186,7 +220,7 @@ namespace rws_moliveira
         marker.color.r = 1.0;
         marker.color.g = 1.0;
         marker.color.b = 0.0;
-        marker.text = "nao percebem nada disto!";
+        marker.text = "vou-te apanhar " + player_to_hunt;
         marker.lifetime = ros::Duration(2);
         pub->publish( marker );
 
