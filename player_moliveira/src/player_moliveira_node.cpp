@@ -1,4 +1,4 @@
-#include <iostream>                                                                                     
+#include <iostream>   
 #include <vector>                                                                                     
 
 //Boost includes
@@ -39,8 +39,8 @@ namespace rws_moliveira
         }
         else
         {
-          cout << "cannot set team name to " << argin_team << endl;
-          return 0;
+          ROS_ERROR("cannot set team name to %s", argin_team.c_str());
+          ros::shutdown();
         }
       }
 
@@ -62,15 +62,39 @@ namespace rws_moliveira
       boost::shared_ptr<Team> red_team;
       boost::shared_ptr<Team> green_team;
       boost::shared_ptr<Team> blue_team;
+      boost::shared_ptr<Team> my_team;
+      boost::shared_ptr<Team> my_preys;
+      boost::shared_ptr<Team> my_hunters;
+
       tf::TransformBroadcaster br; //declare the broadcaster
 
-      MyPlayer(string argin_name, string argin_team) : Player(argin_name)
+      MyPlayer(string argin_name, string argin_team/*disregard this one. overrided by params*/) : Player(argin_name)
     {
       red_team = boost::shared_ptr<Team> (new Team("red"));
       green_team = boost::shared_ptr<Team> (new Team("green"));
       blue_team = boost::shared_ptr<Team> (new Team("blue"));
 
-      setTeamName(argin_team);
+      if (red_team->playerBelongsToTeam(name))
+      {
+        my_team = red_team;
+        my_preys = green_team;
+        my_hunters = blue_team;
+        setTeamName("red");
+      }
+      else if (green_team->playerBelongsToTeam(name))
+      {
+        my_team = green_team;
+        my_preys = blue_team;
+        my_hunters = red_team;
+        setTeamName("green");
+      }
+      else if (blue_team->playerBelongsToTeam(name))
+      {
+        my_team = blue_team;
+        my_preys = red_team;
+        my_hunters = green_team;
+        setTeamName("blue");
+      }
 
 
       printReport();
@@ -84,11 +108,12 @@ namespace rws_moliveira
         q.setRPY(0, 0, M_PI/3);
         transform.setRotation(q);
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "moliveira"));
-      }
+
+            }
 
       void printReport()
       {
-        cout << "My name is " << name << " and my team is " << getTeamName() << endl;
+        ROS_INFO("My name is %s and my team is %s", name.c_str(), (getTeamName().c_str()) );
       }
 
   };
@@ -103,11 +128,6 @@ int main(int argc, char** argv)
 
   //Creating an instance of class Player
   rws_moliveira::MyPlayer my_player("moliveira", "green");
-
-  if (my_player.red_team->playerBelongsToTeam("amartins"))
-  {
-    cout << "a joana esta na equipa certa" << endl;
-  };
 
   ros::Rate loop_rate(10);
   while (ros::ok())

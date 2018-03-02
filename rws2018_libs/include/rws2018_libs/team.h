@@ -19,10 +19,10 @@ class Team
     ros::NodeHandle n;
     n.getParam("/team_" + name, player_names);
 
-    std::cout << "I am team  " << name << " and my players are:" << std::endl;
+    ROS_INFO_STREAM("I am team  " << name << " and my players are:");
     for (size_t i=0; i < player_names.size(); i++ )
     {
-      std::cout << player_names[i] << std::endl;
+      ROS_INFO_STREAM(player_names[i]);
     }
   }
 
