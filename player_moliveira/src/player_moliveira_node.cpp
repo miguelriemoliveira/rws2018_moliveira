@@ -71,6 +71,7 @@ namespace rws_moliveira
       tf::TransformBroadcaster br; //declare the broadcaster
       ros::NodeHandle n;
       boost::shared_ptr<ros::Subscriber> sub;
+      tf::Transform T; //declare the transformation object (player's pose wrt world)
 
 
       MyPlayer(string argin_name, string argin_team/*disregard this one. overrided by params*/) : Player(argin_name)
@@ -104,18 +105,34 @@ namespace rws_moliveira
       sub = boost::shared_ptr<ros::Subscriber> (new ros::Subscriber());
       *sub = n.subscribe("/make_a_play", 100, &MyPlayer::move, this);
 
+      warp(randomizePosition(), randomizePosition(), M_PI/2);
+
       printReport();
     }
 
+
+      void warp(double x, double y, double alfa)
+      {
+        T.setOrigin( tf::Vector3(x, y, 0.0) );
+        tf::Quaternion q;
+        q.setRPY(0, 0, alfa);
+        T.setRotation(q);
+        br.sendTransform(tf::StampedTransform(T, ros::Time::now(), "world", "moliveira"));
+        ROS_INFO("Warping to x=%f y=%f a=%f", x,y,alfa);
+      }
+
       void move(const rws2018_msgs::MakeAPlay::ConstPtr& msg)
       {
-        static float x = 0;
-        tf::Transform transform; //declare the transformation object
-        transform.setOrigin( tf::Vector3(x+=0.01, 1, 0.0) );
+        double x = T.getOrigin().x();
+        double y = T.getOrigin().y();
+        double a = 0;
+
+        T.setOrigin( tf::Vector3(x+=0.01, y, 0.0) );
         tf::Quaternion q;
-        q.setRPY(0, 0, M_PI/3);
-        transform.setRotation(q);
-        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "moliveira"));
+        q.setRPY(0, 0, a);
+        T.setRotation(q);
+
+        br.sendTransform(tf::StampedTransform(T, ros::Time::now(), "world", "moliveira"));
         ROS_INFO("Moving to ");
 
       }
