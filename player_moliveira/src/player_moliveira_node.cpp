@@ -9,6 +9,8 @@
 #include <rws2018_libs/team.h>
 #include <tf/transform_broadcaster.h>
 
+#include <rws2018_msgs/MakeAPlay.h>
+
 using namespace std;
 
 namespace rws_moliveira
