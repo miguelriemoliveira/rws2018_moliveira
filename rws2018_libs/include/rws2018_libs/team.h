@@ -12,6 +12,7 @@
 
 float randomizePosition()
 {
+  srand(6832*time(NULL)); // set initial seed value to 5323
   return (((double)rand() / (RAND_MAX)) - 0.5) * 10;
 }
 

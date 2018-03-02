@@ -105,7 +105,13 @@ namespace rws_moliveira
       sub = boost::shared_ptr<ros::Subscriber> (new ros::Subscriber());
       *sub = n.subscribe("/make_a_play", 100, &MyPlayer::move, this);
 
-      warp(randomizePosition(), randomizePosition(), M_PI/2);
+      struct timeval t1;
+      gettimeofday(&t1, NULL);
+      srand(t1.tv_usec);
+      double start_x = ((double)rand()/(double)RAND_MAX) *10 -5;
+      double start_y = ((double)rand()/(double)RAND_MAX) *10 -5;
+      printf("start_x=%f start_y=%f\n", start_x, start_y);
+      warp(start_x, start_y, M_PI/2);
 
       printReport();
     }
@@ -152,7 +158,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "moliveira");
   ros::NodeHandle n;
 
-  
+
 
   //Creating an instance of class Player
   rws_moliveira::MyPlayer my_player("moliveira", "doesnotmatter");
@@ -161,10 +167,10 @@ int main(int argc, char** argv)
   //ros::Rate loop_rate(10);
   //while (ros::ok())
   //{
-    //my_player.move();
+  //my_player.move();
 
-    //ros::spinOnce();
-    //loop_rate.sleep();
+  //ros::spinOnce();
+  //loop_rate.sleep();
   //}
 
 }
