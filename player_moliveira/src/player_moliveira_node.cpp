@@ -69,6 +69,9 @@ namespace rws_moliveira
       boost::shared_ptr<Team> my_hunters;
 
       tf::TransformBroadcaster br; //declare the broadcaster
+      ros::NodeHandle n;
+      boost::shared_ptr<ros::Subscriber> sub;
+
 
       MyPlayer(string argin_name, string argin_team/*disregard this one. overrided by params*/) : Player(argin_name)
     {
@@ -98,20 +101,24 @@ namespace rws_moliveira
         setTeamName("blue");
       }
 
+      sub = boost::shared_ptr<ros::Subscriber> (new ros::Subscriber());
+      *sub = n.subscribe("/make_a_play", 100, &MyPlayer::move, this);
 
       printReport();
     }
 
-      void move(void)
+      void move(const rws2018_msgs::MakeAPlay::ConstPtr& msg)
       {
+        static float x = 0;
         tf::Transform transform; //declare the transformation object
-        transform.setOrigin( tf::Vector3(7, 7, 0.0) );
+        transform.setOrigin( tf::Vector3(x+=0.01, 1, 0.0) );
         tf::Quaternion q;
         q.setRPY(0, 0, M_PI/3);
         transform.setRotation(q);
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "moliveira"));
+        ROS_INFO("Moving to ");
 
-            }
+      }
 
       void printReport()
       {
@@ -128,17 +135,20 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "moliveira");
   ros::NodeHandle n;
 
+  
+
   //Creating an instance of class Player
-  rws_moliveira::MyPlayer my_player("moliveira", "green");
+  rws_moliveira::MyPlayer my_player("moliveira", "doesnotmatter");
 
-  ros::Rate loop_rate(10);
-  while (ros::ok())
-  {
-    my_player.move();
+  ros::spin();
+  //ros::Rate loop_rate(10);
+  //while (ros::ok())
+  //{
+    //my_player.move();
 
-    ros::spinOnce();
-    loop_rate.sleep();
-  }
+    //ros::spinOnce();
+    //loop_rate.sleep();
+  //}
 
 }
 
