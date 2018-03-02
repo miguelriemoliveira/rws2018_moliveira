@@ -197,7 +197,7 @@ Visualization Manager:
       Marker Topic: /bocas
       Name: Bocas
       Namespaces:
-        {}
+        moliveira: true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker

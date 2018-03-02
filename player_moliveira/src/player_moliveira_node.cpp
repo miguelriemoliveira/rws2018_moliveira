@@ -8,11 +8,16 @@
 #include <ros/ros.h>
 #include <rws2018_libs/team.h>
 #include <tf/transform_broadcaster.h>
+#include <tf/transform_listener.h>
 #include <visualization_msgs/Marker.h>
 
 #include <rws2018_msgs/MakeAPlay.h>
 
+#define DEFAULT_TIME 0.05
+
 using namespace std;
+using namespace ros;
+using namespace tf;
 
 namespace rws_moliveira
 {
@@ -74,6 +79,7 @@ namespace rws_moliveira
       boost::shared_ptr<ros::Subscriber> sub;
       tf::Transform T; //declare the transformation object (player's pose wrt world)
       boost::shared_ptr<ros::Publisher> pub;
+      tf::TransformListener listener;
 
       MyPlayer(string argin_name, string argin_team/*disregard this one. overrided by params*/) : Player(argin_name)
     {
@@ -115,6 +121,8 @@ namespace rws_moliveira
       double start_x = ((double)rand()/(double)RAND_MAX) *10 -5;
       double start_y = ((double)rand()/(double)RAND_MAX) *10 -5;
       printf("start_x=%f start_y=%f\n", start_x, start_y);
+
+      ros::Duration(0.1).sleep();
       warp(start_x, start_y, M_PI/2);
 
       printReport();
@@ -130,6 +138,26 @@ namespace rws_moliveira
         ROS_INFO("Warping to x=%f y=%f a=%f", x,y,alfa);
       }
 
+
+      double getAngleToPLayer(string other_player, double time_to_wait=DEFAULT_TIME)
+      {
+        StampedTransform t; //The transform object
+        //Time now = Time::now(); //get the time
+        Time now = Time(0); //get the latest transform received
+
+        try{
+          listener.waitForTransform("moliveira", other_player, now, Duration(time_to_wait));
+          listener.lookupTransform("moliveira", other_player, now, t);
+        }
+        catch (TransformException& ex){
+          ROS_ERROR("%s",ex.what());
+          return NAN;
+        }
+
+        return atan2(t.getOrigin().y(), t.getOrigin().x());
+      }
+
+
       void move(const rws2018_msgs::MakeAPlay::ConstPtr& msg)
       {
         double x = T.getOrigin().x();
@@ -140,8 +168,10 @@ namespace rws_moliveira
         //--- AI PART 
         //---------------------------------------
         double displacement = 6; //computed using AI
-        double delta_alpha = M_PI/2;
+        double delta_alpha = getAngleToPLayer("tosorio");
 
+        if (isnan(delta_alpha))
+          delta_alpha = 0;
 
         visualization_msgs::Marker marker;
         marker.header.frame_id = "moliveira";
@@ -174,7 +204,7 @@ namespace rws_moliveira
         tf::Quaternion q1;
         q1.setRPY(0, 0, delta_alpha);
         my_move_T.setRotation(q1);
- 
+
         T = T * my_move_T;
         br.sendTransform(tf::StampedTransform(T, ros::Time::now(), "world", "moliveira"));
 
