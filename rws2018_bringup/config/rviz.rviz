@@ -52,99 +52,41 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        amartins:
-          Value: true
-        blourenco:
-          Value: true
-        filipecosta:
-          Value: true
-        jmota:
-          Value: true
-        jrodrigues:
-          Value: true
-        lsarmento:
-          Value: true
-        moliveira:
-          Value: true
-        nsilva:
-          Value: true
-        pboucanova:
-          Value: true
-        resteves:
-          Value: true
-        rsilva:
-          Value: true
-        ssantos:
-          Value: true
-        tmarques:
-          Value: true
-        tosorio:
-          Value: true
-        world:
-          Value: true
       Marker Scale: 4
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        world:
-          amartins:
-            {}
-          blourenco:
-            {}
-          filipecosta:
-            {}
-          jmota:
-            {}
-          jrodrigues:
-            {}
-          lsarmento:
-            {}
-          moliveira:
-            {}
-          nsilva:
-            {}
-          pboucanova:
-            {}
-          resteves:
-            {}
-          rsilva:
-            {}
-          ssantos:
-            {}
-          tmarques:
-            {}
-          tosorio:
-            {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /player_markers
       Name: Players
       Namespaces:
-        {}
+        ns: true
       Queue Size: 100
-      Value: false
+      Value: true
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /referee_markers
       Name: RefereeMarkers
       Namespaces:
         {}
       Queue Size: 100
-      Value: false
+      Value: true
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: /score_markers
       Name: ScoreBoard
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
     - Class: rviz/Axes
@@ -159,7 +101,17 @@ Visualization Manager:
       Marker Topic: /kill_markers
       Name: Killing
       Namespaces:
-        {}
+        amartins: true
+        blourenco: true
+        filipecosta: true
+        jmota: true
+        moliveira: true
+        nsilva: true
+        pboucanova: true
+        resteves: true
+        rsilva: true
+        ssantos: true
+        tosorio: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -193,13 +145,13 @@ Visualization Manager:
       Use rainbow: true
       Value: false
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: /bocas
       Name: Bocas
       Namespaces:
-        moliveira: true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: true
       Marker Topic: /object_point_cloud_marker
@@ -210,7 +162,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 0; 0; 0
+    Background Color: 255; 255; 255
     Fixed Frame: world
     Frame Rate: 30
   Name: root
@@ -231,7 +183,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: -0.0150000071
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
@@ -241,7 +193,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 58.491993
+      Scale: 65.5842438
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: 0.608245015
