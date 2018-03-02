@@ -116,7 +116,6 @@ namespace rws_moliveira
       printReport();
     }
 
-
       void warp(double x, double y, double alfa)
       {
         T.setOrigin( tf::Vector3(x, y, 0.0) );
@@ -133,13 +132,31 @@ namespace rws_moliveira
         double y = T.getOrigin().y();
         double a = 0;
 
-        T.setOrigin( tf::Vector3(x+=0.01, y, 0.0) );
-        tf::Quaternion q;
-        q.setRPY(0, 0, a);
-        T.setRotation(q);
+        //---------------------------------------
+        //--- AI PART 
+        //---------------------------------------
+        double displacement = 6; //computed using AI
+        double delta_alpha = M_PI/2;
 
+
+        //---------------------------------------
+        //--- CONSTRAINS PART 
+        //---------------------------------------
+        double displacement_max = msg->dog;
+        double displacement_with_constrains;
+        displacement > displacement_max ? displacement = displacement_max: displacement = displacement;
+
+        double delta_alpha_max = M_PI/30;
+        fabs(delta_alpha) > fabs(delta_alpha_max) ? delta_alpha = delta_alpha_max * delta_alpha / fabs(delta_alpha): delta_alpha = delta_alpha;
+
+        tf::Transform my_move_T; //declare the transformation object (player's pose wrt world)
+        my_move_T.setOrigin( tf::Vector3(displacement, 0.0, 0.0) );
+        tf::Quaternion q1;
+        q1.setRPY(0, 0, delta_alpha);
+        my_move_T.setRotation(q1);
+ 
+        T = T * my_move_T;
         br.sendTransform(tf::StampedTransform(T, ros::Time::now(), "world", "moliveira"));
-        ROS_INFO("Moving to ");
 
       }
 
