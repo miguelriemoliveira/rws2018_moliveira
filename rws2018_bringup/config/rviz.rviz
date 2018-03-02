@@ -102,16 +102,9 @@ Visualization Manager:
       Name: Killing
       Namespaces:
         amartins: true
-        blourenco: true
-        filipecosta: true
-        jmota: true
-        moliveira: true
         nsilva: true
-        pboucanova: true
         resteves: true
-        rsilva: true
-        ssantos: true
-        tosorio: true
+        tmarques: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -193,7 +186,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 65.5842438
+      Scale: 51.5743408
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: 0.608245015
