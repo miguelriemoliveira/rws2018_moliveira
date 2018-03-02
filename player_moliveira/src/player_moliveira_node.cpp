@@ -189,16 +189,16 @@ namespace rws_moliveira
         //Find nearest prey (player_to_hunt will be the nearest prey player)
         double min_distance = 99999;
         string player_to_hunt = "no player";
-        for (size_t i=0; i < my_preys->player_names.size(); i++)
+        for (size_t i=0; i < msg->green_alive.size(); i++)
         {
-            double dist = getDistanceToPlayer(my_preys->player_names[i]);
+            double dist = getDistanceToPlayer(msg->green_alive[i]);
             if (isnan(dist))
             {
             }
             else if (dist < min_distance)
             {
               min_distance = dist;
-              player_to_hunt = my_preys->player_names[i];
+              player_to_hunt = msg->green_alive[i];
             }
         }
         

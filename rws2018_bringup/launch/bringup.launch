@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- -->
 <launch>
-  <arg name="delay" default="10"/>
+  <arg name="delay" default="5"/>
   <!-- teams -->
   <!-- team red -->
   <node pkg="player_moliveira" type="player_moliveira_node" name="moliveira" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
@@ -31,7 +31,6 @@
   <!--Launch the killer-->
   <node pkg="rws2018_referee" type="killer.py" name="killer"/>
   <node pkg="rws2018_referee" type="draw_teams" name="draw_teams"/>
-
   <!--[>Launch the players<]-->
   <!--[>Team red<]-->
   <!--<node pkg="player_idomingues" type="player_idomingues" name="idomingues" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->

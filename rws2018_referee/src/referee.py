@@ -127,32 +127,32 @@ def timerCallback(event):
 
     a = MakeAPlay()
 
-    #global teamA, teamB, teamC
-    #global killed
-    #print("killed: " + str(killed))
+    global teamA, teamB, teamC
+    global killed
+    print("killed: " + str(killed))
 
-    #if len(killed)==0:
-        #players_killed = []
-    #else:
-        #players_killed = [i[0] for i in killed]
+    if len(killed)==0:
+        players_killed = []
+    else:
+        players_killed = [i[0] for i in killed]
 
-    #for player in teamA:
-        #if player in players_killed:
-            #a.red_dead.append(player)
-        #else:
-            #a.red_alive.append(player)
+    for player in teamA:
+        if player in players_killed:
+            a.red_dead.append(player)
+        else:
+            a.red_alive.append(player)
 
-    #for player in teamB:
-        #if player in players_killed:
-            #a.green_dead.append(player)
-        #else:
-            #a.green_alive.append(player)
+    for player in teamB:
+        if player in players_killed:
+            a.green_dead.append(player)
+        else:
+            a.green_alive.append(player)
 
-    #for player in teamC:
-        #if player in players_killed:
-            #a.blue_dead.append(player)
-        #else:
-            #a.blue_alive.append(player)
+    for player in teamC:
+        if player in players_killed:
+            a.blue_dead.append(player)
+        else:
+            a.blue_alive.append(player)
 
     #cheetah
     md = 0.1
