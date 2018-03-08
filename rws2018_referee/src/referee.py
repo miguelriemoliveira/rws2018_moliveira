@@ -35,6 +35,7 @@ player_score_neg = dict()
 selected_team_count = 0
 game_pause = False
 over = False
+to_print_end = True
 def gameQueryCallback(event):
     global teamA, teamB, teamC, selected_team_count, game_pause, score
     game_pause = True 
@@ -170,10 +171,13 @@ def timerCallback(event):
         pub_make_a_play.publish(a)
 
 def printScores():
-    for player,score in player_score_neg.iteritems():
-        rospy.loginfo(player + " died: " + str(score))
-    for player,score in player_score_pos.iteritems():
-        rospy.loginfo(player + " killed: " +  str(score))
+    global to_print_end
+    if to_print_end:
+        for player,score in player_score_neg.iteritems():
+            rospy.loginfo(player + " died: " + str(score))
+        for player,score in player_score_pos.iteritems():
+            rospy.loginfo(player + " killed: " +  str(score))
+        to_print_end = False
 
 
 def gameEndCallback(event):
