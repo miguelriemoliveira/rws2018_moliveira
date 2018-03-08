@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   rws2018_msgs
+  pcl_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -136,6 +137,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/rws2018_referee_node.cpp)
 add_executable(draw_teams src/draw_teams.cpp)
+add_executable(pcd2pointcloud src/pcd2pointcloud.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,6 +153,11 @@ add_executable(draw_teams src/draw_teams.cpp)
 target_link_libraries(draw_teams
   ${catkin_LIBRARIES}
 )
+
+target_link_libraries(pcd2pointcloud
+  ${catkin_LIBRARIES}
+)
+
 
 #############
 ## Install ##

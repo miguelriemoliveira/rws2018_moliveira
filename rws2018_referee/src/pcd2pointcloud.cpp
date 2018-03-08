@@ -55,7 +55,7 @@ int main (int argc, char** argv)
 
     sensor_msgs::PointCloud2 msg;
     pcl::toROSMsg (*cloud, msg);
-    msg.header.frame_id = ros::names::remap("/map");
+    msg.header.frame_id = ros::names::remap("/world");
 
     string output="/camera/depth_registered/points"; 
     if (ros::param::get("~output", output))
@@ -74,9 +74,9 @@ int main (int argc, char** argv)
     ros::Publisher pub_marker = nh.advertise<visualization_msgs::Marker>(output + "_marker", 1);
 
     visualization_msgs::Marker marker;
-    marker.header.frame_id = ros::names::remap("/map");
+    marker.header.frame_id = ros::names::remap("/world");
     marker.header.stamp = ros::Time();
-    marker.ns = ros::names::remap("/map");
+    marker.ns = ros::names::remap("/world");
     marker.id = 0;
     marker.type = visualization_msgs::Marker::POINTS;
     marker.action = visualization_msgs::Marker::ADD;

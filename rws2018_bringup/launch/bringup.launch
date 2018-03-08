@@ -4,30 +4,30 @@
   <arg name="delay" default="5"/>
   <!-- teams -->
   <!-- team red -->
-  <node pkg="player_moliveira" type="player_moliveira_node" name="moliveira" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_lsarmento" type="player_lsarmento_node" name="lsarmento" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_blourenco" type="player_blourenco_node" name="blourenco" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_jmota" type="player_jmota_node" name="jmota" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_bramos" type="player_bramos_node" name="bramos" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_moliveira" type="player_moliveira_node" name="moliveira" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_lsarmento" type="player_lsarmento_node" name="lsarmento" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_blourenco" type="player_blourenco_node" name="blourenco" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_jmota" type="player_jmota_node" name="jmota" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_bramos" type="player_bramos_node" name="bramos" respawn="true" respawn_delay="$(arg delay)"/>
   <!-- team green -->
-  <node pkg="player_rsilva" type="player_rsilva_node" name="rsilva" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_tmarques" type="player_tmarques_node" name="tmarques" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_pboucanova" type="player_pboucanova_node" name="pboucanova" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_filipecosta" type="player_filipecosta_node" name="filipecosta" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_tosorio" type="player_tosorio_node" name="tosorio" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_rsilva" type="player_rsilva_node" name="rsilva" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_tmarques" type="player_tmarques_node" name="tmarques" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_pboucanova" type="player_pboucanova_node" name="pboucanova" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_filipecosta" type="player_filipecosta_node" name="filipecosta" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_tosorio" type="player_tosorio_node" name="tosorio" respawn="true" respawn_delay="$(arg delay)"/>
   <!-- team blue  -->
-  <node pkg="player_amartins" type="player_amartins_node" name="amartins" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_amartins" type="player_amartins_node" name="amartins" respawn="true" respawn_delay="$(arg delay)"/>
   <!--<node pkg="player_resteves" type="player_resteves_node" name="resteves" output="screen" respawn="true" respawn_delay="$(arg delay)"/>-->
-  <node pkg="player_nsilva" type="player_nsilva_node" name="nsilva" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_jrodrigues" type="player_jrodrigues_node" name="jrodrigues" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_ssantos" type="player_ssantos_node" name="ssantos" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_nsilva" type="player_nsilva_node" name="nsilva" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_jrodrigues" type="player_jrodrigues_node" name="jrodrigues" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_ssantos" type="player_ssantos_node" name="ssantos" respawn="true" respawn_delay="$(arg delay)"/>
   <!-- end teams -->
   <!--Load the parameters-->
   <rosparam command="load" file="$(find rws2018_bringup)/params/default.yaml"/>
   <!--Launch the visualization-->
   <node pkg="rviz" type="rviz" name="rviz" args="--display-config $(find rws2018_bringup)/config/rviz.rviz" required="true"/>
   <!--Launch the referee-->
-  <node pkg="rws2018_referee" type="referee.py" name="referee"/>
+  <node pkg="rws2018_referee" type="referee.py" name="referee" output="screen"/>
   <!--Launch the killer-->
   <node pkg="rws2018_referee" type="killer.py" name="killer"/>
   <node pkg="rws2018_referee" type="draw_teams" name="draw_teams"/>

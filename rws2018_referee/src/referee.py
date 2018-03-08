@@ -5,7 +5,7 @@ from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
 from std_msgs.msg import String
 from rws2018_msgs.msg import MakeAPlay
-#from rws2018_msgs.srv import GameQuery
+from rws2018_msgs.srv import GameQuery
 import random
 import tf
 import math
@@ -42,7 +42,7 @@ def gameQueryCallback(event):
 
     rospy.loginfo("gameQueryCallback")
     rospy.loginfo("selected_team_count = " + str(selected_team_count))
-    return None
+    #return None
 
     # percorrer a lista de equipas
     team_list = [teamA, teamB, teamC]
@@ -55,21 +55,20 @@ def gameQueryCallback(event):
     # sortear um jogador alive da equipa desta iteracao
 
     selected_player = random.choice(selected_team)
-    #selected_player = "idomingues"
-    #print("selected_player is = " + str(selected_player)) 
+    #selected_player = "moliveira"
+    print("selected_player is = " + str(selected_player)) 
 
     # sortear um objeto
     objects = ["banana", "soda_can", "onion", "tomato"]
     selected_object = random.choice(objects)
 
     rospack = rospkg.RosPack()
-    path_pcd = rospack.get_path('rwsua2017_referee') + "/../pcd/"
+    path_pcd = rospack.get_path('rws2018_referee') + "/../pcd/"
     file_pcd = path_pcd + selected_object + ".pcd"
     #print("vou ler o " + str(file_pcd))
 
     # pedir ao pcd2pointcloud para enviar o objeto
 
-    cmd = "rosrun rwsfi2016_referee pcd2pointcloud _input:="+ file_pcd + " _output:=/object_point_cloud /world:=" + selected_player + " _one_shot:=1"
     #print "Executing command: " + cmd
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     for line in p.stdout.readlines():
@@ -173,10 +172,19 @@ def timerCallback(event):
 def printScores():
     global to_print_end
     if to_print_end:
+
+        #for player in player_score_pos:
         for player,score in player_score_neg.iteritems():
-            rospy.loginfo(player + " died: " + str(score))
-        for player,score in player_score_pos.iteritems():
-            rospy.loginfo(player + " killed: " +  str(score))
+            score_neg = player_score_neg[player]
+            score_pos = player_score_pos[player]
+            score_diff = score_pos - score_neg
+            rospy.loginfo(player + ": killed: " + str(score_pos) + " died: " + str(score)  + " diff: " + str(score_diff))
+        #for player,score in player_score_neg.iteritems():
+            #rospy.loginfo(player + " died: " + str(score))
+        #for player,score in player_score_pos.iteritems():
+            #rospy.loginfo(player + " killed: " +  str(score))
+        #for player,score in player_score_dif.iteritems():
+            #rospy.loginfo(player + " dif: " +  str(score))
         to_print_end = False
 
 
@@ -186,6 +194,7 @@ def gameEndCallback(event):
     global pub_score
     global over
     over = True
+
     ma = MarkerArray()
     
 
@@ -252,7 +261,7 @@ def talker():
     rospy.Timer(rospy.Duration(0.1), timerCallback, oneshot=False)
     rospy.Timer(rospy.Duration(game_duration), gameEndCallback, oneshot=True)
 
-    #rospy.Timer(rospy.Duration(5), gameQueryCallback, oneshot=False)
+    rospy.Timer(rospy.Duration(25), gameQueryCallback, oneshot=False)
 
     game_start = rospy.get_time()
 
