@@ -288,7 +288,8 @@ def talker():
                     #rospy.loginfo("D from %s to %s is %f", hunter, prey, distance)
                     if distance > max_distance_from_center_of_arena:
                         out_of_arena_A.append(player);
-                        player_score_neg[player] += 1
+                        if not player in killed:
+                            player_score_neg[player] += 1
                         
                 except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                     t=1
@@ -304,7 +305,8 @@ def talker():
                     #rospy.loginfo("D from %s to %s is %f", hunter, prey, distance)
                     if distance > max_distance_from_center_of_arena:
                         out_of_arena_B.append(player);
-                        player_score_neg[player] += 1
+                        if not player in killed:
+                            player_score_neg[player] += 1
                 except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                     t=1
                     #rospy.loginfo("Referee: tf error")
@@ -319,7 +321,8 @@ def talker():
                     #rospy.loginfo("D from %s to %s is %f", hunter, prey, distance)
                     if distance > max_distance_from_center_of_arena:
                         out_of_arena_C.append(player);
-                        player_score_neg[player] += 1
+                        if not player in killed:
+                            player_score_neg[player] += 1
                 except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                     t=1
                     #rospy.loginfo("Referee: tf error")
@@ -341,8 +344,9 @@ def talker():
                         #rospy.loginfo("D from %s to %s is %f", hunter, prey, distance)
                         if distance < hunting_distance:
                             to_be_killed_A.append(prey);
-                            player_score_neg[prey] += 1
-                            player_score_pos[hunter] += 1
+                            if not prey in killed:
+                                player_score_neg[prey] += 1
+                                player_score_pos[hunter] += 1
                     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                         t=1
                         #rospy.loginfo("Referee: tf error")
@@ -359,8 +363,9 @@ def talker():
                         #rospy.loginfo("D from %s to %s is %f", hunter, prey, distance)
                         if distance < hunting_distance:
                             to_be_killed_B.append(prey);
-                            player_score_neg[prey] += 1
-                            player_score_pos[hunter] += 1
+                            if not prey in killed:
+                                player_score_neg[prey] += 1
+                                player_score_pos[hunter] += 1
                     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                         t=1
                         #rospy.loginfo("Referee: tf error")
@@ -377,8 +382,9 @@ def talker():
                         #rospy.loginfo("D from %s to %s is %f", hunter, prey, distance)
                         if distance < hunting_distance:
                             to_be_killed_C.append(prey);
-                            player_score_neg[prey] += 1
-                            player_score_pos[hunter] += 1
+                            if not prey in killed:
+                                player_score_neg[prey] += 1
+                                player_score_pos[hunter] += 1
                     except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                         t=1
                         #rospy.loginfo("Referee: tf error")
