@@ -12,6 +12,7 @@
 #include <visualization_msgs/Marker.h>
 
 #include <rws2018_msgs/MakeAPlay.h>
+#include <sensor_msgs/PointCloud2.h>
 #include <rws2018_msgs/GameQuery.h>
 
 #define DEFAULT_TIME 0.05
@@ -78,9 +79,11 @@ namespace rws_moliveira
       tf::TransformBroadcaster br; //declare the broadcaster
       ros::NodeHandle n;
       boost::shared_ptr<ros::Subscriber> sub;
+      boost::shared_ptr<ros::Subscriber> sub_pc;
       tf::Transform T; //declare the transformation object (player's pose wrt world)
       boost::shared_ptr<ros::Publisher> pub;
       boost::shared_ptr<ros::ServiceServer> game_query_srv;
+      string my_point_cloud_guess;
         
       tf::TransformListener listener;
 
@@ -89,6 +92,7 @@ namespace rws_moliveira
       red_team = boost::shared_ptr<Team> (new Team("red"));
       green_team = boost::shared_ptr<Team> (new Team("green"));
       blue_team = boost::shared_ptr<Team> (new Team("blue"));
+      my_point_cloud_guess = "banana";
 
       if (red_team->playerBelongsToTeam(name))
       {
@@ -115,6 +119,9 @@ namespace rws_moliveira
       sub = boost::shared_ptr<ros::Subscriber> (new ros::Subscriber());
       *sub = n.subscribe("/make_a_play", 100, &MyPlayer::move, this);
 
+      sub_pc = boost::shared_ptr<ros::Subscriber> (new ros::Subscriber());
+      *sub_pc = n.subscribe("/object_point_cloud", 1, &MyPlayer::processPointCloud, this);
+
       pub = boost::shared_ptr<ros::Publisher> (new ros::Publisher());
       *pub = n.advertise<visualization_msgs::Marker>( "/bocas", 0 );
 
@@ -138,10 +145,8 @@ namespace rws_moliveira
                  rws2018_msgs::GameQuery::Response &res)
     {
       ROS_WARN("I am %s and I am responding to a service request!", name.c_str());
-    
-      res.resposta = "nao percebo nada disto";
+      res.resposta = my_point_cloud_guess;
       return true;
-    
     }  
 
       void warp(double x, double y, double alfa)
@@ -191,6 +196,18 @@ namespace rws_moliveira
         return atan2(t.getOrigin().y(), t.getOrigin().x());
       }
 
+
+      /**
+       * @brief
+       *
+       * @param msg
+       */
+      void processPointCloud(const sensor_msgs::PointCloud2::ConstPtr& msg)
+      {
+        ROS_INFO("Received a point cloud.");
+        //AI part for object recognition
+        my_point_cloud_guess = "tomato";
+      }
 
       void move(const rws2018_msgs::MakeAPlay::ConstPtr& msg)
       {
