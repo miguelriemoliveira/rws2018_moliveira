@@ -32,7 +32,7 @@ teamB = []
 teamC = []
 selected_team_count = 0
 game_pause = False
-
+over = False
 def gameQueryCallback(event):
     global teamA, teamB, teamC, selected_team_count, game_pause, score
     game_pause = True 
@@ -122,7 +122,8 @@ def gameQueryCallback(event):
 
 def timerCallback(event):
     global game_pause
-    if game_pause == True:
+    global over
+    if game_pause == True or over:
         return 
 
     a = MakeAPlay()
@@ -168,7 +169,8 @@ def gameEndCallback(event):
 
     rospy.loginfo("Game finished")
     global pub_score
-
+    global over
+    over = True
     ma = MarkerArray()
 
     m1 = Marker()
