@@ -3,7 +3,7 @@ team_green: ["rsilva","tmarques","pboucanova","filipecosta","tosorio"]
 team_blue: ["amartins","resteves","nsilva","jrodrigues","ssantos"]
 
 hunting_distance: 0.5
-game_duration: 12
+game_duration: 120
 positive_score: 1
 negative_score: -1
 

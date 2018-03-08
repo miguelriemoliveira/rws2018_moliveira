@@ -12,6 +12,7 @@
 #include <visualization_msgs/Marker.h>
 
 #include <rws2018_msgs/MakeAPlay.h>
+#include <rws2018_msgs/GameQuery.h>
 
 #define DEFAULT_TIME 0.05
 
@@ -79,6 +80,8 @@ namespace rws_moliveira
       boost::shared_ptr<ros::Subscriber> sub;
       tf::Transform T; //declare the transformation object (player's pose wrt world)
       boost::shared_ptr<ros::Publisher> pub;
+      boost::shared_ptr<ros::ServiceServer> game_query_srv;
+        
       tf::TransformListener listener;
 
       MyPlayer(string argin_name, string argin_team/*disregard this one. overrided by params*/) : Player(argin_name)
@@ -115,6 +118,9 @@ namespace rws_moliveira
       pub = boost::shared_ptr<ros::Publisher> (new ros::Publisher());
       *pub = n.advertise<visualization_msgs::Marker>( "/bocas", 0 );
 
+      game_query_srv = boost::shared_ptr<ros::ServiceServer> (new ros::ServiceServer());
+      *game_query_srv = n.advertiseService("/" + name + "/game_query", &MyPlayer::respondToGameQuery, this);
+
       struct timeval t1;
       gettimeofday(&t1, NULL);
       srand(t1.tv_usec);
@@ -127,6 +133,16 @@ namespace rws_moliveira
 
       printReport();
     }
+
+    bool respondToGameQuery(rws2018_msgs::GameQuery::Request  &req,
+                 rws2018_msgs::GameQuery::Response &res)
+    {
+      ROS_WARN("I am %s and I am responding to a service request!", name.c_str());
+    
+      res.resposta = "nao percebo nada disto";
+      return true;
+    
+    }  
 
       void warp(double x, double y, double alfa)
       {
