@@ -69,6 +69,7 @@ def gameQueryCallback(event):
 
     # pedir ao pcd2pointcloud para enviar o objeto
 
+    cmd = "rosrun rws2018_referee pcd2pointcloud _input:="+ file_pcd + " _output:=/object_point_cloud /world:=" + selected_player + " _one_shot:=1"
     #print "Executing command: " + cmd
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     for line in p.stdout.readlines():
