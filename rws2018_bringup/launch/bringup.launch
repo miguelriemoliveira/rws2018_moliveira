@@ -13,7 +13,7 @@
   <node pkg="player_rsilva" type="player_rsilva_node" name="rsilva" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_tmarques" type="player_tmarques_node" name="tmarques" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_pboucanova" type="player_pboucanova_node" name="pboucanova" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
-  <node pkg="player_filipecosta" type="player_filipecosta_node" name="fcosta" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
+  <node pkg="player_filipecosta" type="player_filipecosta_node" name="filipecosta" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <node pkg="player_tosorio" type="player_tosorio_node" name="tosorio" output="screen" respawn="true" respawn_delay="$(arg delay)"/>
   <!-- team blue  -->
   <node pkg="player_amartins" type="player_amartins_node" name="amartins" output="screen" respawn="true" respawn_delay="$(arg delay)"/>

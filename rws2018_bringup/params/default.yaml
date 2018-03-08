@@ -1,9 +1,9 @@
-team_red: ["moliveira","lsarmento","blourenco", "jmota"]
+team_red: ["moliveira","lsarmento","blourenco", "jmota","bramos"]
 team_green: ["rsilva","tmarques","pboucanova","filipecosta","tosorio"]
 team_blue: ["amartins","resteves","nsilva","jrodrigues","ssantos"]
 
 hunting_distance: 0.5
-game_duration: 120
+game_duration: 12
 positive_score: 1
 negative_score: -1
 
