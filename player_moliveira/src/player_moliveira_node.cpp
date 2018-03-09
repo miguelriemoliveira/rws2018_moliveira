@@ -15,6 +15,13 @@
 #include <sensor_msgs/PointCloud2.h>
 #include <rws2018_msgs/GameQuery.h>
 
+
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/point_types.h>
+#include <pcl/PCLPointCloud2.h>
+#include <pcl/conversions.h>
+#include <pcl_ros/transforms.h>
+
 #define DEFAULT_TIME 0.05
 
 using namespace std;
@@ -203,9 +210,23 @@ namespace rws_moliveira
        * @param msg
        */
       void processPointCloud(const sensor_msgs::PointCloud2::ConstPtr& msg)
+      //void processPointCloud(const pcl_ros::PointCloud<Pcl::PointXYZRGB>::ConstPtr& msg)
       {
         ROS_INFO("Received a point cloud.");
         //AI part for object recognition
+       
+         //pcl::PCLPointCloud2 pcl_pc2;
+         //pcl_conversions::toPCL(*msg,pcl_pc2);
+         //pcl::PointCloud<pcl::PointXYZRGB>::Ptr temp_cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
+         //pcl::fromPCLPointCloud2(pcl_pc2,*temp_cloud);
+               
+         //double x_avg = 0;
+         //for (size_t i = 0; i < temp_cloud->points.size(); i++)
+         //{
+            //x_avg += temp_cloud->points[i].x; 
+         
+         //}
+        
         my_point_cloud_guess = "tomato";
       }
 
