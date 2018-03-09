@@ -6,7 +6,8 @@ March 1st, 2nd and 8th. University of Aveiro.
 
 ![docs/arena.png](docs/arena.png?raw=true "Game arena")
 
+![docs/score.png](docs/score.png?raw=true "Game arena")
 
-Here is a video of the last game of the competition.
+Here is a [video](https://youtu.be/ja2APGL8PsA) of the last game of the competition.
 
-https://youtu.be/ja2APGL8PsA
+
